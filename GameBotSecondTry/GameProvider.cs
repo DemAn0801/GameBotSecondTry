@@ -3,7 +3,8 @@
 namespace GameBotSecondTry
 {
     class GameProvider
-    {
+    { 
+        //переменные для выбора диапозона случайных чисел
         private int firstValueForRandom;
         public int FirstValueForRandom
         {
@@ -16,13 +17,14 @@ namespace GameBotSecondTry
             get { return secondValueForRandom; }
             set { secondValueForRandom = value; }
         }
-
+        // генерация случайного числа
         public int  GenerationRandomNumber()
         {
             Random randomNumder = new Random();
             int rnd = randomNumder.Next(FirstValueForRandom, SecondValueForRandom);
             return rnd;
         }
+             // проверка совпадения введенного числа и случайно сгенерированного
         public void TestOfAttempt()
         {
             Console.WriteLine($"Сделай попытку угадать задуманное число: {GenerationRandomNumber()}");
@@ -40,6 +42,7 @@ namespace GameBotSecondTry
                 TestOfAttempt();
             }
         }
+            // запрос на повтор игры в случае совпадения
             public void ReapeatGame()
         {
             Console.WriteLine("Хочешь повторить игру: Да/Нет?");
