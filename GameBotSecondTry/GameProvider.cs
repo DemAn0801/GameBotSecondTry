@@ -17,29 +17,31 @@ namespace GameBotSecondTry
             get { return secondValueForRandom; }
             set { secondValueForRandom = value; }
         }
-        // генерация случайного числа
-        public int  GenerationRandomNumber()
-        {
-            Random randomNumder = new Random();
-            int rnd = randomNumder.Next(FirstValueForRandom, SecondValueForRandom);
-            return rnd;
-        }
              // проверка совпадения введенного числа и случайно сгенерированного
         public void TestOfAttempt()
         {
-            Console.WriteLine($"Сделай попытку угадать задуманное число: {GenerationRandomNumber()}");
-            
+            Random randomNumder = new Random();
+            int rnd = randomNumder.Next(FirstValueForRandom, SecondValueForRandom);
+            int count = 0;
+            for (; ; )
+            {
+            Console.WriteLine($"Сделай попытку угадать задуманное число: {rnd}");
+                count++;
             string firstAttempt = Console.ReadLine();
             int FirstAttempt = Convert.ToInt32(firstAttempt);
-            if (FirstAttempt == GenerationRandomNumber())
+            if (FirstAttempt < rnd)
             {
-            Console.WriteLine("Угадал!");
-            ReapeatGame();
+            Console.WriteLine($"Загаданное число больше : {rnd}");
+            }
+            else if (FirstAttempt > rnd)
+             {
+            Console.WriteLine($"Загаданное число меньше: {rnd}");
             }
             else
             {
-            Console.WriteLine($"Не угадал, попробуй еще: {GenerationRandomNumber()}");
-                TestOfAttempt();
+                Console.WriteLine("Угадал!");
+                ReapeatGame();
+            }
             }
         }
             // запрос на повтор игры в случае совпадения
@@ -54,6 +56,10 @@ namespace GameBotSecondTry
                     break;
                 case "Нет":
                     Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("неверный ввод");
+                    ReapeatGame();
                     break;
             }
         }
